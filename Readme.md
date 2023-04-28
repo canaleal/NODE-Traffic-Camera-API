@@ -19,9 +19,8 @@ This API provides access to Toronto's traffic cameras, allowing developers to in
   <tr> 
     <td align='center'><img src="https://img.shields.io/badge/node.js-%23121011.svg?style=for-the-badge&logo=node.js" alt="Node.js"/></td>
     <td align='center'><img src="https://img.shields.io/badge/express.js-%23121011.svg?style=for-the-badge" alt="Express.js"/></td>
-    <td align='center'><img src="https://img.shields.io/badge/googlecloud-%23121011.svg?style=for-the-badge&logo=google-cloud" alt="Google Cloud"/></td>
+    <td align='center'><img src="https://img.shields.io/badge/supabase-%23121011.svg?style=for-the-badge&logo=supabase" alt="Supabase"/></td>
     <td align='center'><img src="https://img.shields.io/badge/docker-%23121011.svg?style=for-the-badge&logo=docker" alt="Docker"/></td>
-    <td align='center'><img src="https://img.shields.io/badge/tensorflow-%23121011.svg?style=for-the-badge&logo=tensorflow" alt="TensorFlow"/></td>
   </tr>
  </table>
 </div>
