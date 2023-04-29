@@ -1,26 +1,18 @@
-import type { Geometry } from "./geometry-types";
+import type { IGeometryType } from "./geometry-types";
 
-export interface TrafficCamera {
+
+export interface ITrafficCamera {
   id: number;
-  recId: number;
-  imageUrl: string;
-
-  refUrl1?: string;
-  direction1?: string;
-
-  refUrl2?: string;
-  direction2?: string;
-
-  mainRoad?: string;
-  crossRoad?: string;
-
-  objectId: number;
-
-  refUrl3?: string;
-  direction3?: string;
-
-  refUrl4?: string;
-  direction4?: string;
-
-  geometry?: Geometry;
+  created_at: string;
+  updated_at: string;
+  image_url: string;
+  image_url_north?: string;
+  image_url_east?: string;
+  image_url_south?: string;
+  image_url_west?: string;
+  main_road: string;
+  cross_road: string;
+  gps_type: IGeometryType;
+  gps_coordinates: number[];
 }
+

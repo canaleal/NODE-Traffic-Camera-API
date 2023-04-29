@@ -1,32 +1,34 @@
-import express, { Request, Response, NextFunction } from 'express';
-import axios from 'axios';
+import express from 'express';
+import cameraRouter from './routes/traffic-camera-route';
 
-import { supabase } from './config/supabase-config';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
 
-
-// Middleware example
-const exampleMiddleware = (req: Request, res: Response, next: NextFunction) => {
-  console.log('Request received:', req.method, req.url);
-  next();
-};
+import { logger } from './middleware/index';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
-
-// Use the middleware
-app.use(exampleMiddleware);
-
-// Route example
-app.get('/', async (req, res) => {
-  try {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
-    res.json(response.data);
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching data from external API' });
-  }
-});
-
-// Start the server
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan('combined'));
+
+// Add middleware here
+app.use(logger);
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
 });
+
+
+// Add routes here
+app.use('/camera', cameraRouter);
+
+
+const instance = app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
+
+export { app as server, instance };

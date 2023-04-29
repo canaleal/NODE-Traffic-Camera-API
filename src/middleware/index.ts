@@ -12,3 +12,14 @@ export function errorLog(err: Error, req: Request, res: Response): void {
   // next(); // you can call either next or send a uniform error response
   res.status(500).send({ status: "server-error", message: err.message });
 }
+
+// Middleware function to log the request method and URL
+export const logger = (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): void => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+  };
+  
