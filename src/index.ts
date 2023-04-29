@@ -15,8 +15,6 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('combined'));
-
-// Add middleware here
 app.use(logger);
 
 app.get('/', (req, res) => {
