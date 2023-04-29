@@ -1,5 +1,6 @@
 import express from 'express';
 import cameraRouter from './routes/traffic-camera-route';
+import redLightCameraRouter from './routes/red-light-camera-routes';
 
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 
 // Add routes here
 app.use('/camera', cameraRouter);
+app.use('/red-light', redLightCameraRouter);
 
 
 const instance = app.listen(port, () => {

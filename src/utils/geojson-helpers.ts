@@ -1,21 +1,21 @@
 import { IGeojson, IFeature } from "../types/geojson-types";
-import { ITrafficCamera } from "../types/traffic-camera-types";
+import { ICamera } from "../types/camera-types";
 
 
-export const trafficCamerasToGeojson = (trafficCameras: ITrafficCamera[]):IGeojson => {
+export const camerasToGeojson = (cameras: ICamera[]):IGeojson => {
 
     const features: IFeature[] = [];
 
-    for(let i=0, len=trafficCameras.length; i<len; i++) {
+    for(let i=0, len=cameras.length; i<len; i++) {
 
-        const trafficCamera = trafficCameras[i];
+        const camera = cameras[i];
         const feature: IFeature = {
             type: "Feature",
             geometry: {
                 type: "Point",
-                coordinates: trafficCamera.gps_coordinates
+                coordinates: camera.gps_coordinates
             },
-            properties: {...trafficCamera}
+            properties: {...camera}
         };
         features.push(feature);   
     }
