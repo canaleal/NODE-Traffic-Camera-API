@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
 import { supabase } from '../config/supabase-config';
+import { trafficCamerasToGeojson } from '../utils/geojson-helpers';
+import { ITrafficCamera } from '../types/traffic-camera-types';
 
 export const getTrafficCamera = async (req: Request, res: Response) => {
     try {
+        const { format } = req.query;
         const { data, error } = await supabase
             .from('toronto_traffic_cameras')
             .select('*')
@@ -14,8 +17,12 @@ export const getTrafficCamera = async (req: Request, res: Response) => {
         if (data === null) {
             return res.status(404).send({ status: "not-found" });
         }
-        return res.status(200).send({ status: "success", data: data });
 
+        const trafficCameras = data as ITrafficCamera[];
+        if (format === "geojson") {
+            return res.status(200).send({ status: "success", data: trafficCamerasToGeojson(trafficCameras) });
+        }
+        return res.status(200).send({ status: "success", data: trafficCameras });
     }
     catch (err) {
         return res.status(500).send({ status: "server-error" });
@@ -24,10 +31,8 @@ export const getTrafficCamera = async (req: Request, res: Response) => {
 
 export const getTrafficCameras = async (req: Request, res: Response) => {
     try {
-        const { data, error } = await supabase
-            .from('toronto_traffic_cameras')
-            .select('*')
-            .order('id', { ascending: true });
+        const { format } = req.query;
+        const { data, error } = await supabase.from('toronto_traffic_cameras').select('*');
 
         if (error) {
             return res.status(500).send({ status: "server-error" });
@@ -36,8 +41,11 @@ export const getTrafficCameras = async (req: Request, res: Response) => {
             return res.status(404).send({ status: "not-found" });
         }
 
-        return res.status(200).send({ status: "success", data: data });
-
+        const trafficCameras = data as ITrafficCamera[];
+        if (format === "geojson") {
+            return res.status(200).send({ status: "success", data: trafficCamerasToGeojson(trafficCameras) });
+        }
+        return res.status(200).send({ status: "success", data: trafficCameras });
     }
     catch (err) {
         return res.status(500).send({ status: "server-error" });

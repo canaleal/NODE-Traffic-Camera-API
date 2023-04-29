@@ -1,4 +1,4 @@
-import type { IGeometryType } from "./geometry-types";
+import type { IGeojsonGeometryType } from "./geojson-types";
 
 
 export interface ITrafficCamera {
@@ -12,7 +12,7 @@ export interface ITrafficCamera {
   image_url_west?: string;
   main_road: string;
   cross_road: string;
-  gps_type: IGeometryType;
+  gps_type: IGeojsonGeometryType;
   gps_coordinates: number[];
 }
 
