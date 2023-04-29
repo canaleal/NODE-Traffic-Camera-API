@@ -1,11 +1,9 @@
 import express from 'express';
-import cameraRouter from './routes/traffic-camera-route';
-import redLightCameraRouter from './routes/red-light-camera-routes';
-
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-
 import { logger } from './middleware/index';
+import routes from './routes';
+import helmet from 'helmet';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -16,16 +14,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('combined'));
 app.use(logger);
+app.use(helmet());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
-
-// Add routes here
-app.use('/camera', cameraRouter);
-app.use('/red-light', redLightCameraRouter);
-
+app.use('/camera', routes.cameraRouter);
+app.use('/red-light', routes.redLightCameraRouter);
 
 const instance = app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
