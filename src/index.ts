@@ -18,6 +18,7 @@ app.use(helmet());
 
 app.use('/camera', routes.cameraRouter);
 app.use('/red-light', routes.redLightCameraRouter);
+app.use('/speed', routes.speedCameraRouter);
 
 const instance = app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
