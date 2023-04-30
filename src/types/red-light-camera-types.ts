@@ -1,6 +1,6 @@
 import { ICamera } from "./camera-types";
 
-export interface ITorontoRedLightCamera extends ICamera {
+export interface IRedLightCamera extends ICamera {
     main_road?: string;
     cross_road?: string;
     district?: string;

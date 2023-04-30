@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
 import { supabase } from '../config/supabase-config';
+import { IRedLightCamera } from '../types/red-light-camera-types';
+import { camerasToGeojson } from '../utils/geojson-helpers';
 
 export const getRedLightCameraController = async (req: Request, res: Response) => {
     try {
+        const { format } = req.query;
         const { data, error } = await supabase
             .from('toronto_red_light_cameras')
             .select('*')
@@ -14,7 +17,11 @@ export const getRedLightCameraController = async (req: Request, res: Response) =
         if (data === null) {
             return res.status(404).send({ status: "not-found" });
         }
-        return res.status(200).send({ status: "success", data: data });
+        const redLightCameras = data as IRedLightCamera[];
+        if (format === "geojson") {
+            return res.status(200).send({ status: "success", data: camerasToGeojson(redLightCameras) });
+        }
+        return res.status(200).send({ status: "success", data: redLightCameras });
     }
     catch (err) {
         return res.status(500).send({ status: "server-error" });
@@ -23,6 +30,7 @@ export const getRedLightCameraController = async (req: Request, res: Response) =
 
 export const getRedLightCamerasController = async (req: Request, res: Response) => {
     try {
+        const { format } = req.query;
         const { data, error } = await supabase.from('toronto_red_light_cameras').select('*');
 
         if (error) {
@@ -32,7 +40,11 @@ export const getRedLightCamerasController = async (req: Request, res: Response) 
             return res.status(404).send({ status: "not-found" });
         }
 
-        return res.status(200).send({ status: "success", data: data });
+        const redLightCameras = data as IRedLightCamera[];
+        if (format === "geojson") {
+            return res.status(200).send({ status: "success", data: camerasToGeojson(redLightCameras) });
+        }
+        return res.status(200).send({ status: "success", data: redLightCameras });
     }
     catch (err) {
         return res.status(500).send({ status: "server-error" });
@@ -74,3 +86,4 @@ export const deleteRedLightCamerasController = async (req: Request, res: Respons
         return res.status(500).send({ status: "server-error" });
     }
 }
+
