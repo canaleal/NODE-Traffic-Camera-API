@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import { logger } from './middleware/index';
 import routes from './routes';
 import helmet from 'helmet';
+import { rateLimitMiddleware } from './middleware/rate-limit-middleware';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('combined'));
 app.use(logger);
 app.use(helmet());
+app.use(rateLimitMiddleware)
 
 app.use('/camera', routes.cameraRouter);
 app.use('/red-light', routes.redLightCameraRouter);
