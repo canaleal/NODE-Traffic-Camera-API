@@ -7,6 +7,7 @@ import helmet from 'helmet';
 import { rateLimitMiddleware } from './middleware/rate-limit-middleware';
 import cors from 'cors';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 const app = express();
@@ -25,7 +26,7 @@ app.use(logger);
 app.use(helmet());
 app.use(rateLimitMiddleware)
 
-app.use('/camera', routes.cameraRouter);
+app.use('/camera',  routes.cameraRouter);
 app.use('/red-light', routes.redLightCameraRouter);
 app.use('/speed', routes.speedCameraRouter);
 
