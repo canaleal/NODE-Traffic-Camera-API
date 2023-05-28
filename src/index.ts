@@ -7,6 +7,9 @@ import helmet from 'helmet';
 import { rateLimitMiddleware } from './middleware/rate-limit-middleware';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerDefinition } from './swaggerDef';
 
 dotenv.config();
 
@@ -19,14 +22,20 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+const specs = swaggerJsdoc(swaggerDefinition);
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs, {
+  explorer: true,
+}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('combined'));
 app.use(logger);
 app.use(helmet());
-app.use(rateLimitMiddleware)
+app.use(rateLimitMiddleware);
 
-app.use('/camera',  routes.cameraRouter);
+app.get('/docs', swaggerUi.setup(specs));
+app.use('/camera', routes.cameraRouter);
 app.use('/red-light', routes.redLightCameraRouter);
 app.use('/speed', routes.speedCameraRouter);
 
