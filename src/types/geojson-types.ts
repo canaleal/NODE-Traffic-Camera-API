@@ -8,7 +8,7 @@ const FEATURE = "Feature";
 export type IGeojsonType = typeof FEATURE_COLLECTION | typeof FEATURE;
 export type IGeojsonGeometryType = typeof POINT | typeof LINESTRING | typeof POLYGON;
 
-export interface IFeature {
+export interface IGeojsonFeature {
     type: IGeojsonType;
     geometry: {
         type: IGeojsonGeometryType;
@@ -19,7 +19,7 @@ export interface IFeature {
     };
 }
 
-export interface IGeojson {
+export interface IGeojsonCollection {
     type: IGeojsonType;
-    features: IFeature[]
+    features: IGeojsonFeature[]
 }

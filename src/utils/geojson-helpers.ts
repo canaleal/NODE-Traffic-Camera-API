@@ -1,15 +1,15 @@
-import { IGeojson, IFeature } from "../types/geojson-types";
+import { IGeojsonCollection, IGeojsonFeature } from "../types/geojson-types";
 import { ICamera } from "../types/camera-types";
 
 
-export const camerasToGeojson = (cameras: ICamera[]):IGeojson => {
+export const camerasToGeojson = (cameras: ICamera[]):IGeojsonCollection => {
 
-    const features: IFeature[] = [];
+    const features: IGeojsonFeature[] = [];
 
     for(let i=0, len=cameras.length; i<len; i++) {
 
         const camera = cameras[i];
-        const feature: IFeature = {
+        const feature: IGeojsonFeature = {
             type: "Feature",
             geometry: {
                 type: "Point",
@@ -20,7 +20,7 @@ export const camerasToGeojson = (cameras: ICamera[]):IGeojson => {
         features.push(feature);   
     }
 
-    const geojson: IGeojson = {
+    const geojson: IGeojsonCollection = {
         type: "FeatureCollection",
         features
     };
