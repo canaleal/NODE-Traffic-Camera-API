@@ -41,7 +41,7 @@ npx nodemon --exec ts-node src/index.ts
 
 The app will be available at http://localhost:3000. You can use the app to upload images and get information about the content of the images. The app can also be containerized using Docker for easy deployment and scaling.
 
-<h1 id="api">Want to make your own API?<h1>
+<h1 id="api">Want to make your own API?</h1>
 
 Go to https://open.toronto.ca/dataset/traffic-cameras/ and scroll down to the bottom. Download the data in Geojson format. This will allow you to load the data on different mapping applications like `google maps`, `esri`, `mapbox`, `cesium`, etc.
 
