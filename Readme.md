@@ -7,6 +7,7 @@
 - [Overview](#overview)
 - [Technologies](#technologies)
 - [Installation](#installation)
+- [Make your own API](#api)
 
 <h1 id="overview">Overview</h1>
 
@@ -39,3 +40,14 @@ To run the app, execute the following command in your terminal:
 npx nodemon --exec ts-node src/index.ts
 
 The app will be available at http://localhost:3000. You can use the app to upload images and get information about the content of the images. The app can also be containerized using Docker for easy deployment and scaling.
+
+<h1 id="api">Want to make your own API?<h1>
+
+Go to https://open.toronto.ca/dataset/traffic-cameras/ and scroll down to the bottom. Download the data in Geojson format. This will allow you to load the data on different mapping applications like `google maps`, `esri`, `mapbox`, `cesium`, etc.
+
+![image info](./images/DownloadData.png)
+
+To view the data, go to https://geojson.io/#map=2/0/20 and then click the `Open` button and select the data you just downloaded. 
+
+
+![image info](./images/Load.png)
